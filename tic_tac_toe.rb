@@ -102,8 +102,8 @@ end
 class Game
   def ask_user_move(grid)
     loop do
-      row_choice = prompt('Choose which row (top, middle, bottom)').downcase
-      cell_choice = prompt('Choose which cell (left, center, right)').downcase
+      row_choice = gets('Choose which row (top, middle, bottom)').downcase
+      cell_choice = gets('Choose which cell (left, center, right)').downcase
       move = convert_grid_index(row_choice, cell_choice)
       return move if move && grid[move[0]][move[1]] == EMPTY
 
