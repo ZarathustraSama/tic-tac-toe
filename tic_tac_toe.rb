@@ -94,6 +94,8 @@ end
 # Where all the logic interaction occurs
 class Game
   def initialize
+    attr_accessor :grid
+
     @grid = Grid.new
   end
 
