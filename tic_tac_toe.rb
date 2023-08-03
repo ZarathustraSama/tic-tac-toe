@@ -12,8 +12,6 @@ class Grid
     @grid = initial_state
   end
 
-  private
-
   def initial_state
     [[EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY]]
   end
@@ -129,7 +127,7 @@ end
 game = Game.new
 grid = game.grid
 loop do
-  grid.draw_grid
+  grid.draw_grid(grid)
   game_over = grid.game_over?(grid)
   player = grid.get_current_player(grid)
   if game_over
