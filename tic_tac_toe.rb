@@ -134,5 +134,5 @@ loop do
   else
     puts("Player #{player}'s turn")
   end
-  make_move
+  game.make_move
 end
