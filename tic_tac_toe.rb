@@ -6,6 +6,8 @@ EMPTY = nil
 
 # The board of the game (3 x 3)
 class Grid
+  attr_accessor :grid
+
   def initialize
     @grid = initial_state
   end
