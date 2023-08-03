@@ -41,7 +41,7 @@ class Grid
   end
 
   def get_winner(grid)
-    get_winner_row(grid) || get_winner_column || get_winner_diagonal
+    get_winner_row(grid) || get_winner_column(grid) || get_winner_diagonal(grid)
     nil
   end
 
@@ -127,7 +127,7 @@ loop do
   game_over = grid.game_over?(grid.grid)
   player = grid.get_current_player(grid.grid)
   if game_over
-    winner = grid.get_winner
+    winner = grid.get_winner(grid.grid)
     winner.nil? ? puts('Game Over: It\'s a tie!') : puts("Game Over: #{winner} wins!")
   else
     puts("Player #{player}'s turn")
