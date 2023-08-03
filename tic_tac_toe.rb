@@ -12,6 +12,8 @@ class Grid
     @grid = initial_state
   end
 
+  private
+
   def initial_state
     [[EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY]]
   end
@@ -76,6 +78,10 @@ class Grid
     true
   end
 
+  def make_move(move)
+    @grid[move[0]][move[1]] = @current_player
+  end
+
   def draw_grid(grid)
     puts('')
     draw_row(grid[0])
@@ -104,11 +110,6 @@ class Game
 
   private
 
-  def make_move
-    move = ask_user_move
-    @grid[move[0]][move[1]] = @current_player
-  end
-
   def ask_user_move
     loop do
       row_choice = prompt('Choose which row (top, middle, bottom)').downcase
@@ -130,16 +131,16 @@ class Game
 end
 
 game = Game.new
-grid = game.grid
+grid = Grid.new
 loop do
   grid.draw_grid(grid.grid)
-  game_over = grid.game_over?(grid)
-  player = grid.get_current_player(grid)
+  game_over = grid.game_over?(grid.grid)
+  player = grid.get_current_player(grid.grid)
   if game_over
     winner = grid.get_winner
     winner.nil? ? puts('Game Over: It\'s a tie!') : puts("Game Over: #{winner} wins!")
   else
     puts("Player #{player}'s turn")
   end
-  game.make_move
+  grid.make_move(game.ask_user_move)
 end
