@@ -77,15 +77,20 @@ class Grid
   end
 
   def draw_grid(grid)
+    puts('')
     draw_row(grid[0])
-    puts('------')
+    puts('')
+    puts('-------------')
     draw_row(grid[1])
-    puts('------')
+    puts('')
+    puts('-------------')
     draw_row(grid[2])
+    puts('')
+    puts('')
   end
 
   def draw_row(row)
-    row.each { |cell| puts("#{cell || ' '} | ") }
+    row.each { |cell| print("#{cell || ' '} | ") }
   end
 end
 
@@ -127,7 +132,7 @@ end
 game = Game.new
 grid = game.grid
 loop do
-  grid.draw_grid(grid)
+  grid.draw_grid(grid.grid)
   game_over = grid.game_over?(grid)
   player = grid.get_current_player(grid)
   if game_over
