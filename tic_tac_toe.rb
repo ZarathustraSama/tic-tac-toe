@@ -12,8 +12,6 @@ class Grid
     @grid = initial_state
   end
 
-  private
-
   def initial_state
     [[EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY]]
   end
@@ -102,20 +100,12 @@ end
 
 # Where all the logic interaction occurs
 class Game
-  attr_accessor :grid
-
-  def initialize
-    @grid = Grid.new
-  end
-
-  private
-
-  def ask_user_move
+  def ask_user_move(grid)
     loop do
       row_choice = prompt('Choose which row (top, middle, bottom)').downcase
       cell_choice = prompt('Choose which cell (left, center, right)').downcase
       move = convert_grid_index(row_choice, cell_choice)
-      return move if move && @grid[move[0]][move[1]] == EMPTY
+      return move if move && grid[move[0]][move[1]] == EMPTY
 
       puts('You can\'t do that!')
     end
@@ -142,5 +132,5 @@ loop do
   else
     puts("Player #{player}'s turn")
   end
-  grid.make_move(game.ask_user_move)
+  grid.make_move(game.ask_user_move(grid.grid))
 end
