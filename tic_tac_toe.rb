@@ -108,11 +108,9 @@ end
 class Game
   def ask_user_move(grid)
     loop do
-      puts('Choose which row (top, middle, bottom)')
-      row_choice = gets.chomp.downcase
-      puts('Choose which cell (left, center, right)')
-      cell_choice = gets.chomp.downcase
-      move = convert_grid_index(row_choice, cell_choice)
+      puts('Choose which row (top, middle, bottom) and which cell (left, center, right)')
+      cell_choice = gets.chomp.downcase.split(' ')
+      move = convert_grid_index(cell_choice[0], cell_choice[1])
       return move if move && grid[move[0]][move[1]] == EMPTY
 
       puts('You can\'t do that!')
