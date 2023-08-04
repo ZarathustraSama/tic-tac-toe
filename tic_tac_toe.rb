@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'pry-byebug'
+
 X = 'X'
 O = 'O'
 EMPTY = nil
@@ -41,7 +43,9 @@ class Grid
   end
 
   def get_winner(grid)
-    get_winner_row(grid) || get_winner_column(grid) || get_winner_diagonal(grid)
+    winner = get_winner_row(grid) || get_winner_column(grid) || get_winner_diagonal(grid)
+    return winner if winner
+
     nil
   end
 
@@ -82,21 +86,20 @@ class Grid
   end
 
   def draw_grid(grid)
-    puts('')
-    puts('')
+    puts("\n")
     draw_row(grid[0])
-    puts('')
-    puts('-------------')
+    puts("\n-----------")
     draw_row(grid[1])
-    puts('')
-    puts('-------------')
+    puts("\n-----------")
     draw_row(grid[2])
-    puts('')
-    puts('')
+    puts("\n\n")
   end
 
   def draw_row(row)
-    row.each { |cell| print("#{cell || ' '} | ") }
+    row_string = ''
+    row.each { |cell| row_string += " #{cell || ' '} |" }
+    row_string.chomp!('|')
+    print row_string
   end
 end
 
@@ -132,7 +135,7 @@ loop do
   player = grid.get_current_player(grid.grid)
   if game_over
     winner = grid.get_winner(grid.grid)
-    winner.nil? ? puts('Game Over: It\'s a tie!') : puts("Game Over: #{winner} wins!")
+    return winner.nil? ? puts('Game Over: It\'s a tie!') : puts("Game Over: #{winner} wins!")
   else
     puts("Player #{player}'s turn")
   end
