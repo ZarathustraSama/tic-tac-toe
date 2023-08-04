@@ -76,11 +76,13 @@ class Grid
     true
   end
 
-  def make_move(move)
-    @grid[move[0]][move[1]] = @current_player
+  def make_move(move, grid)
+    grid[move[0]][move[1]] = get_current_player(grid)
+    self
   end
 
   def draw_grid(grid)
+    puts('')
     puts('')
     draw_row(grid[0])
     puts('')
@@ -134,5 +136,5 @@ loop do
   else
     puts("Player #{player}'s turn")
   end
-  grid.make_move(game.ask_user_move(grid.grid))
+  grid = grid.make_move(game.ask_user_move(grid.grid), grid.grid)
 end
