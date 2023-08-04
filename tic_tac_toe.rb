@@ -55,8 +55,10 @@ class Grid
   end
 
   def get_winner_column(grid)
-    grid.each.each_with_index do |cell, i|
-      return cell if [grid[0][i], grid[1][i], grid[2][i]].uniq.count == 1 && i <= 2 && cell != EMPTY
+    grid.each do |row|
+      row.each_with_index do |cell, i|
+        return cell if [grid[0][i], grid[1][i], grid[2][i]].uniq.count == 1 && i <= 2 && cell != EMPTY
+      end
     end
     nil
   end
@@ -98,8 +100,7 @@ class Grid
   def draw_row(row)
     row_string = ''
     row.each { |cell| row_string += " #{cell || ' '} |" }
-    row_string.chomp!('|')
-    print row_string
+    print row_string.chomp!('|')
   end
 end
 
