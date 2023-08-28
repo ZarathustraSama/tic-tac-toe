@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry-byebug'
-
 X = 'X'
 O = 'O'
 EMPTY = nil
