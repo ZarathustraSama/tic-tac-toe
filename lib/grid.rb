@@ -19,9 +19,7 @@ class Grid
       return
     end
 
-    x = reduce_grid_x(grid)
-    o = reduce_grid_o(grid)
-    x > o ? O : X
+    reduce_grid(grid, X) > reduce_grid(grid, O) ? O : X
   end
 
   def get_winner(grid)
@@ -60,17 +58,11 @@ class Grid
     [[EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY]]
   end
 
-  # Helper functions to check if there are more 'x' or 'o' in the grid
-  def reduce_grid_x(grid)
+  # Helper function to check how many x/o are in the grid
+  def reduce_grid(grid, player)
     x = 0
-    grid.each { |row| row.each { |cell| x += 1 if cell == X } }
+    grid.each { |row| row.each { |cell| x += 1 if cell == player } }
     x
-  end
-
-  def reduce_grid_o(grid)
-    o = 0
-    grid.each { |row| row.each { |cell| o += 1 if cell == O } }
-    o
   end
 
   # After the game over, checks for rows, columns and diagonals
