@@ -29,6 +29,8 @@ class Grid
     i
   end
 
+  # After the game over, checks for rows, columns and diagonals
+  # If none won, returns nil (it's a tie)
   def get_winner
     winner = get_winner_row || get_winner_column || get_winner_diagonal
     return winner if winner
@@ -36,8 +38,6 @@ class Grid
     nil
   end
 
-  # After the game over, checks for rows, columns and diagonals
-  # If none won, returns nil (it's a tie)
   def get_winner_row
     @grid.each { |row| return row[0] if row.uniq.count == 1 && row[0] != EMPTY }
     nil
