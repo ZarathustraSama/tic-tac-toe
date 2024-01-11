@@ -12,10 +12,6 @@ class Grid
     @grid = initial_state
   end
 
-  def initial_state
-    [[EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY]]
-  end
-
   def get_current_player(grid)
     if grid == initial_state
       return X
@@ -28,6 +24,43 @@ class Grid
     x > o ? O : X
   end
 
+  def get_winner(grid)
+    winner = get_winner_row(grid) || get_winner_column(grid) || get_winner_diagonal(grid)
+    return winner if winner
+
+    nil
+  end
+
+  def game_over?(grid)
+    return true if get_winner(grid)
+    return false if grid.flatten.any?(nil)
+
+    true
+  end
+
+  def make_move(move, grid)
+    grid[move[0]][move[1]] = get_current_player(grid)
+    self
+  end
+
+  def draw_grid(grid)
+    puts("\n")
+    draw_row(grid[0])
+    puts("\n-----------")
+    draw_row(grid[1])
+    puts("\n-----------")
+    draw_row(grid[2])
+    puts("\n\n")
+  end
+
+  private
+
+  # The initial state of a classic 3 by 3 board
+  def initial_state
+    [[EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY]]
+  end
+
+  # Helper functions to check if there are more 'x' or 'o' in the grid
   def reduce_grid_x(grid)
     x = 0
     grid.each { |row| row.each { |cell| x += 1 if cell == X } }
@@ -40,13 +73,8 @@ class Grid
     o
   end
 
-  def get_winner(grid)
-    winner = get_winner_row(grid) || get_winner_column(grid) || get_winner_diagonal(grid)
-    return winner if winner
-
-    nil
-  end
-
+  # After the game over, checks for rows, columns and diagonals
+  # If none won, returns nil (it's a tie)
   def get_winner_row(grid)
     grid.each { |row| return row[0] if row.uniq.count == 1 && row[0] != EMPTY }
     nil
@@ -73,28 +101,7 @@ class Grid
     left_diagonal.uniq.count == 1 || right_diagonal.uniq.count == 1
   end
 
-  def game_over?(grid)
-    return true if get_winner(grid)
-    return false if grid.flatten.any?(nil)
-
-    true
-  end
-
-  def make_move(move, grid)
-    grid[move[0]][move[1]] = get_current_player(grid)
-    self
-  end
-
-  def draw_grid(grid)
-    puts("\n")
-    draw_row(grid[0])
-    puts("\n-----------")
-    draw_row(grid[1])
-    puts("\n-----------")
-    draw_row(grid[2])
-    puts("\n\n")
-  end
-
+  # Helper function for drawing a row with cells
   def draw_row(row)
     row_string = ''
     row.each { |cell| row_string += " #{cell || ' '} |" }
