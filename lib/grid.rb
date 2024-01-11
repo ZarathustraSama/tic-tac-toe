@@ -30,7 +30,7 @@ class Grid
   end
 
   def get_winner
-    winner = get_winner_row|| get_winner_column || get_winner_diagonal
+    winner = get_winner_row || get_winner_column || get_winner_diagonal
     return winner if winner
 
     nil
