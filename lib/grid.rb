@@ -24,9 +24,9 @@ class Grid
       
   # Helper function to check how many x/o are in the grid
   def reduce_grid(grid, player)
-    x = 0
-    grid.each { |row| row.each { |cell| x += 1 if cell == player } }
-    x
+    i = 0
+    grid.each { |row| row.each { |cell| i += 1 if cell == player } }
+    i
   end
 
   def get_winner(grid)
