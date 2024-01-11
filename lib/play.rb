@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'grid.rb'
-require 'game.rb'
+require './grid.rb'
+require './game.rb'
 
 EMPTY = nil
 grid = Grid.new
