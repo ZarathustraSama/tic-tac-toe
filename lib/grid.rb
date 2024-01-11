@@ -29,6 +29,34 @@ class Grid
     nil
   end
 
+      # After the game over, checks for rows, columns and diagonals
+    # If none won, returns nil (it's a tie)
+    def get_winner_row(grid)
+      grid.each { |row| return row[0] if row.uniq.count == 1 && row[0] != EMPTY }
+      nil
+    end
+  
+    def get_winner_column(grid)
+      grid.each do |row|
+        row.each_with_index do |cell, i|
+          return cell if [grid[0][i], grid[1][i], grid[2][i]].uniq.count == 1 && i <= 2 && cell != EMPTY
+        end
+      end
+      nil
+    end
+  
+    def get_winner_diagonal(grid)
+      return grid[1][1] if eql_diagonal?(grid) && grid[1][1] != EMPTY
+  
+      nil
+    end
+  
+    def eql_diagonal?(grid)
+      left_diagonal = [grid[0][0], grid[1][1], grid[2][2]]
+      right_diagonal = [grid[0][2], grid[1][1], grid[2][0]]
+      left_diagonal.uniq.count == 1 || right_diagonal.uniq.count == 1
+    end
+
   def game_over?(grid)
     return true if get_winner(grid)
     return false if grid.flatten.any?(nil)
@@ -51,52 +79,24 @@ class Grid
     puts("\n\n")
   end
 
+    # Helper function to check how many x/o are in the grid
+    def reduce_grid(grid, player)
+      x = 0
+      grid.each { |row| row.each { |cell| x += 1 if cell == player } }
+      x
+    end
+  
+    # Helper function for drawing a row with cells
+    def draw_row(row)
+      row_string = ''
+      row.each { |cell| row_string += " #{cell || ' '} |" }
+      print row_string.chomp!('|')
+    end
+
   private
 
   # The initial state of a classic 3 by 3 board
   def initial_state
     [[EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY]]
-  end
-
-  # Helper function to check how many x/o are in the grid
-  def reduce_grid(grid, player)
-    x = 0
-    grid.each { |row| row.each { |cell| x += 1 if cell == player } }
-    x
-  end
-
-  # After the game over, checks for rows, columns and diagonals
-  # If none won, returns nil (it's a tie)
-  def get_winner_row(grid)
-    grid.each { |row| return row[0] if row.uniq.count == 1 && row[0] != EMPTY }
-    nil
-  end
-
-  def get_winner_column(grid)
-    grid.each do |row|
-      row.each_with_index do |cell, i|
-        return cell if [grid[0][i], grid[1][i], grid[2][i]].uniq.count == 1 && i <= 2 && cell != EMPTY
-      end
-    end
-    nil
-  end
-
-  def get_winner_diagonal(grid)
-    return grid[1][1] if eql_diagonal?(grid) && grid[1][1] != EMPTY
-
-    nil
-  end
-
-  def eql_diagonal?(grid)
-    left_diagonal = [grid[0][0], grid[1][1], grid[2][2]]
-    right_diagonal = [grid[0][2], grid[1][1], grid[2][0]]
-    left_diagonal.uniq.count == 1 || right_diagonal.uniq.count == 1
-  end
-
-  # Helper function for drawing a row with cells
-  def draw_row(row)
-    row_string = ''
-    row.each { |cell| row_string += " #{cell || ' '} |" }
-    print row_string.chomp!('|')
   end
 end
