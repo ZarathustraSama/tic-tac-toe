@@ -8,8 +8,8 @@ EMPTY = nil
 class Grid
   attr_accessor :grid
 
-  def initialize
-    @grid = initial_state
+  def initialize(grid = initial_state)
+    @grid = grid
   end
 
   def get_current_player(grid)
