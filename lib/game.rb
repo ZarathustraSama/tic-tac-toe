@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-EMPTY = nil
-
 # Where user/game interaction occurs
 class Game
   def ask_user_move(grid)

@@ -25,3 +25,7 @@ class Play
     end
   end
 end
+
+play = Play.new
+
+play.play_game
