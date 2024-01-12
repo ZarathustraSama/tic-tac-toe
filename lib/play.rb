@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative './grid.rb'
-require_relative './game.rb'
+require_relative './grid'
+require_relative './game'
 
 EMPTY = nil
 
