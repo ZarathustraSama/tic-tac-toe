@@ -39,6 +39,24 @@ describe Grid do
     end
   end
 
+  describe '#get_winner_diagonal' do
+    context 'when none has made a full diagonal' do
+      subject(:grid_diagonal) { described_class.new([['X', 'O', nil], ['X', 'O', nil], ['X', nil, nil]]) }
+
+      it 'returns nil' do
+        expect(grid_diagonal.get_winner_diagonal).to eql(nil)
+      end
+    end
+
+    context 'when a player has made a full diagonal' do
+      subject(:grid_diagonal) { described_class.new([['X', 'O', 'nil'], ['O', 'X', nil], [nil, nil, 'X']]) }
+
+      it 'returns the player' do
+        expect(grid_diagonal.get_winner_diagonal).to eql('X')
+      end
+    end
+  end
+
 
 
   describe '#reduce_grid' do
