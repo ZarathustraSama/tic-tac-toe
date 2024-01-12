@@ -94,6 +94,7 @@ class Grid
     print row_string.chomp!('|')
   end
 
+  # Helper function for checking diagonals
   def eql_diagonal?
     left_diagonal = [@grid[0][0], @grid[1][1], @grid[2][2]]
     right_diagonal = [@grid[0][2], @grid[1][1], @grid[2][0]]
