@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/grid.rb'
+require_relative '../lib/grid'
 
 describe Grid do
   describe '#get_winner_row' do
@@ -57,10 +57,33 @@ describe Grid do
     end
   end
 
+  describe '#game_over?' do
+    context 'when there is a winner' do
+      subject(:grid_over) { described_class.new([['X', 'X', 'X'], [nil, nil, nil], [nil, nil, nil]]) }
 
+      it 'returns true' do
+        expect(grid_over).to be_game_over
+      end
+    end
+
+    context 'when there are still moves left' do
+      subject(:grid_not_over) { described_class.new }
+
+      it 'returns false' do
+        expect(grid_not_over).not_to be_game_over
+      end
+    end
+
+    context 'when there are no possible moves left' do
+      subject(:grid_over) { described_class.new([['X', 'O', 'X'], ['X', 'O', 'X'], ['O', 'X', 'O']]) }
+
+      it 'returns true' do
+        expect(grid_over).to be_game_over
+      end
+    end
+  end
 
   describe '#reduce_grid' do
-
     context 'at the beginning of the game' do
       subject(:grid_start) { described_class.new }
 
@@ -107,6 +130,4 @@ describe Grid do
       end
     end
   end
-
-
 end
