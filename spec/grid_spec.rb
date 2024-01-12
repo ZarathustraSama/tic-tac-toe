@@ -130,4 +130,13 @@ describe Grid do
       end
     end
   end
+
+  describe '#make_move' do
+    let(:move) { [0, 0] }
+    subject(:grid_move) { described_class.new }
+
+    it 'fills the grid in the correct place' do
+      expect(grid_move.make_move(move).grid).to eql([['X', nil, nil], [nil, nil, nil], [nil, nil, nil]])
+    end
+  end
 end
