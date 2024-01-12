@@ -21,7 +21,7 @@ class Grid
 
     reduce_grid(X) > reduce_grid(O) ? O : X
   end
-      
+
   # Helper function to check how many x/o are in the grid
   def reduce_grid(player)
     i = 0
@@ -51,17 +51,11 @@ class Grid
     end
     nil
   end
-  
+
   def get_winner_diagonal
     return @grid[1][1] if eql_diagonal? && @grid[1][1] != EMPTY
 
     nil
-  end
-
-  def eql_diagonal?
-    left_diagonal = [@grid[0][0], @grid[1][1], @grid[2][2]]
-    right_diagonal = [@grid[0][2], @grid[1][1], @grid[2][0]]
-    left_diagonal.uniq.count == 1 || right_diagonal.uniq.count == 1
   end
 
   def game_over?
@@ -98,5 +92,11 @@ class Grid
     row_string = ''
     row.each { |cell| row_string += " #{cell || ' '} |" }
     print row_string.chomp!('|')
+  end
+
+  def eql_diagonal?
+    left_diagonal = [@grid[0][0], @grid[1][1], @grid[2][2]]
+    right_diagonal = [@grid[0][2], @grid[1][1], @grid[2][0]]
+    left_diagonal.uniq.count == 1 || right_diagonal.uniq.count == 1
   end
 end
