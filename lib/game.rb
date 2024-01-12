@@ -2,7 +2,7 @@
 
 EMPTY = nil
 
-# Where all the logic interaction occurs
+# Where user/game interaction occurs
 class Game
   def ask_user_move(grid)
     loop do
