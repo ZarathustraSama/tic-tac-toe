@@ -123,7 +123,7 @@ describe Grid do
     end
 
     context 'when the game is not over' do
-      subject(:grid_play) { described_class.new([['X', 'O', 'X' ], [nil, nil, nil], [nil, nil, nil]]) }
+      subject(:grid_play) { described_class.new([['X', 'O', 'X'], [nil, nil, nil], [nil, nil, nil]]) }
 
       it 'returns the correct next player' do
         expect(grid_play.get_current_player).to eql('O')
